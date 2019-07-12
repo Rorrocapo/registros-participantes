@@ -5,21 +5,19 @@
  */
 package Controller;
 
-import Model.ProcedureValidateAdmin;
+import Model.ProcedureValidateUser;
 
 /**
  *
  * @author darkness
  */
 public class ValidateAdmin {
-    
     public static boolean validate=false;
-    
-    public  ValidateAdmin() throws Throwable{
-        
-        new ProcedureValidateAdmin(View.Session.user, View.Session.passwd);
+    public static String userName;
+    public ValidateAdmin(String usr, String psswd) throws Throwable{
+        String statement = "SELECT * FROM usuarios WHERE usuario='"+usr+"' and contraseña='"+psswd+"' and tipo_usuario='admin'";
+        new ProcedureValidateUser(statement);
         this.finalize();
-        
     }
     
 }

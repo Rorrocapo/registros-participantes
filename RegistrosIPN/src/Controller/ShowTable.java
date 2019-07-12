@@ -11,6 +11,8 @@ import javax.swing.JTable;
  *
  * @author Darke
  */
-public class ShowTable extends Thread{   
-    
+public class ShowTable{   
+    public ShowTable(JTable table){
+        new Model.ProcedureShowTable(table);
+    } 
 }

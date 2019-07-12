@@ -12,12 +12,10 @@ import Model.ProcedureValidateUser;
  * @author darkness
  */
 public class ValidateUser {
-    
     public static boolean validate=false;
-    
-    public  ValidateUser() throws Throwable{
-        new ProcedureValidateUser(View.Session.user, View.Session.passwd);
-        finalize();
+    public ValidateUser(String usr, String psswd) throws Throwable{
+        String statement = "SELECT * FROM usuarios WHERE usuario='"+usr+"' and contraseña='"+psswd+"'";
+        new ProcedureValidateUser(statement);
+        this.finalize();
     }
-    
 }

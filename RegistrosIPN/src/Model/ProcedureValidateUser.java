@@ -21,19 +21,23 @@ public class ProcedureValidateUser {
     Database con;
     PreparedStatement consulta;
     ResultSet resultado;
-    public ProcedureValidateUser(String user, String psswd){
+    public ProcedureValidateUser(String statement){
         try {
                 conn = con.getConexion();
-                consulta = conn.prepareStatement("SELECT * FROM usuarios WHERE usuario='"+user+"' and contraseña='"+psswd+"'");
+                consulta = conn.prepareStatement(statement);
                 resultado = consulta.executeQuery();
                 if (resultado.next()) {
+                    Controller.ValidateAdmin.userName=resultado.getString("usuario");
+                    Controller.ValidateAdmin.validate=true;
                     Controller.ValidateUser.validate=true;
                 } else {
+                    Controller.ValidateAdmin.validate=false;
                     Controller.ValidateUser.validate=false;
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+ 
     }
     
 }

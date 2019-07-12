@@ -28,7 +28,7 @@ public class Session extends javax.swing.JFrame {
     Database con;
     PreparedStatement consulta;
     ResultSet resultado;
-    public static String user,passwd;
+    public static String usr,psswd;
     public Session() {
         super("Registros historial de participantes");
         con = new Database();
@@ -38,9 +38,9 @@ public class Session extends javax.swing.JFrame {
     }
     
     public void LoginAdmin() throws Throwable{
-        user=userTextField.getText();
-        passwd= new String(psswdTextField.getPassword());
-        new ValidateAdmin();
+        usr=userTextField.getText();
+        psswd= new String(psswdTextField.getPassword());
+        new ValidateAdmin(usr,psswd);
         if(Controller.ValidateAdmin.validate){
             new AdminWindow().setVisible(true);
             this.dispose();
@@ -48,9 +48,9 @@ public class Session extends javax.swing.JFrame {
     }
     
     public void ValidateUser() throws Throwable{
-        user=userTextField.getText();
-        passwd= new String(psswdTextField.getPassword());
-        new ValidateUser();
+        usr=userTextField.getText();
+        psswd= new String(psswdTextField.getPassword());
+        new ValidateUser(usr,psswd);
         if(Controller.ValidateUser.validate){
             new UserWindow().setVisible(true);
             this.dispose();
@@ -95,6 +95,7 @@ public class Session extends javax.swing.JFrame {
         jLabel2.setText("Contraseña:");
 
         buttonLogin.setText("Entrar");
+        buttonLogin.setFocusable(false);
         buttonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonLoginActionPerformed(evt);
@@ -102,6 +103,7 @@ public class Session extends javax.swing.JFrame {
         });
 
         buttonAdmin.setText("Admin");
+        buttonAdmin.setFocusable(false);
         buttonAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAdminActionPerformed(evt);
