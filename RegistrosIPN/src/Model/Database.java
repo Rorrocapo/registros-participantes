@@ -35,8 +35,11 @@ public class Database {
                 status=false;
             }
         }catch(ClassNotFoundException | SQLException ex){
-            System.out.printf("Error en conexión"+ ex.toString());
-            JOptionPane.showMessageDialog(null, ex);
+            System.out.printf(ex.toString());
+            JOptionPane.showMessageDialog(null,"<html><b>Problemas para conectar a la base de datos.</b></html>\n"
+                    + "<html><b>Error:</b></html>\n"+ex
+            +"\n\n<html><b>Contactar al administrador para resolver el problema</b></html>.");
+            System.exit(0);
         }
     }
     

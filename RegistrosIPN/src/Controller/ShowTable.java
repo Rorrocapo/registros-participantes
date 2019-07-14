@@ -6,13 +6,14 @@
 package Controller;
 
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Darke
  */
 public class ShowTable{   
-    public ShowTable(JTable table){
-        new Model.ProcedureShowTable(table);
+    public ShowTable(JTable table, JTextField counter, boolean typeUser) throws Throwable{
+        new Model.ProcedureShowTable(table,counter,typeUser);
     } 
 }

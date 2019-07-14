@@ -119,3 +119,5 @@ on update restrict
 on delete cascade
 );
 
+insert into usuarios(usuario,contraseña,tipo_usuario)
+	values('admin','admin','admin');
