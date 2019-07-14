@@ -15,11 +15,12 @@ public class AdminWindow extends javax.swing.JFrame {
     /**
      * Creates new form AdminWindow
      */
-    public AdminWindow() {
+    public static final boolean typeAdmin=true;
+    public AdminWindow() throws Throwable {
         initComponents();
         this.setLocationRelativeTo(null);
         userName.setText(Controller.ValidateAdmin.userName);
-        new Controller.ShowTable(tableRegisters);
+        new Controller.ShowTable(tableRegisters,counterRegisters,typeAdmin);
     }
 
     /**
@@ -39,12 +40,14 @@ public class AdminWindow extends javax.swing.JFrame {
         searchRegister = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableRegisters = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        counterRegisters = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         searchUser = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableRegisters1 = new javax.swing.JTable();
+        tableUsers = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -52,15 +55,16 @@ public class AdminWindow extends javax.swing.JFrame {
         createUserTextfield = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         createPswdTextField = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        createUser = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         typeField = new javax.swing.JComboBox();
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        deleteUser = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
+        searchDUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -120,6 +124,13 @@ public class AdminWindow extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableRegisters);
         tableRegisters.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel7.setText("Total de registros.");
+
+        counterRegisters.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        counterRegisters.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        counterRegisters.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -127,20 +138,26 @@ public class AdminWindow extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchRegister)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(backButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchRegister)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(counterRegisters, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,9 +171,13 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchRegister))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(counterRegisters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchRegister)))
                 .addContainerGap())
         );
 
@@ -166,7 +187,7 @@ public class AdminWindow extends javax.swing.JFrame {
         searchUser.setText("Buscar");
         searchUser.setFocusable(false);
 
-        tableRegisters1.setModel(new javax.swing.table.DefaultTableModel(
+        tableUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -185,18 +206,18 @@ public class AdminWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableRegisters1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tableRegisters1.setEnabled(false);
-        tableRegisters1.setFocusable(false);
-        tableRegisters1.getTableHeader().setResizingAllowed(false);
-        tableRegisters1.getTableHeader().setReorderingAllowed(false);
-        tableRegisters1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableUsers.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tableUsers.setEnabled(false);
+        tableUsers.setFocusable(false);
+        tableUsers.getTableHeader().setResizingAllowed(false);
+        tableUsers.getTableHeader().setReorderingAllowed(false);
+        tableUsers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableRegisters1MouseClicked(evt);
+                tableUsersMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tableRegisters1);
-        tableRegisters1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jScrollPane3.setViewportView(tableUsers);
+        tableUsers.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -241,8 +262,8 @@ public class AdminWindow extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Contraseña:");
 
-        jButton4.setText("Crear");
-        jButton4.setFocusable(false);
+        createUser.setText("Crear");
+        createUser.setFocusable(false);
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel9.setText("Tipo de usuario:");
@@ -265,7 +286,7 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addContainerGap(65, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(createUser)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -283,9 +304,9 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(typeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addGap(47, 47, 47))
+                .addGap(40, 40, 40)
+                .addComponent(createUser)
+                .addGap(25, 25, 25))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -293,8 +314,8 @@ public class AdminWindow extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setText("Usuario:");
 
-        jButton5.setText("Borrar");
-        jButton5.setFocusable(false);
+        deleteUser.setText("Borrar");
+        deleteUser.setFocusable(false);
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setText("Tipo de usuario:");
@@ -302,23 +323,26 @@ public class AdminWindow extends javax.swing.JFrame {
         jTextField3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTextField3.setEnabled(false);
 
+        searchDUser.setText("Buscar");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton5))
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6)
                             .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(jLabel8)
                             .addComponent(jTextField3))
-                        .addGap(0, 59, Short.MAX_VALUE)))
+                        .addGap(0, 59, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(searchDUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteUser)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -333,7 +357,9 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteUser)
+                    .addComponent(searchDUser))
                 .addContainerGap())
         );
 
@@ -411,9 +437,9 @@ public class AdminWindow extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_tableRegistersMouseClicked
 
-    private void tableRegisters1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableRegisters1MouseClicked
+    private void tableUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsersMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tableRegisters1MouseClicked
+    }//GEN-LAST:event_tableUsersMouseClicked
 
     /**
      * @param args the command line arguments
@@ -421,16 +447,18 @@ public class AdminWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JTextField counterRegisters;
     private javax.swing.JTextField createPswdTextField;
+    private javax.swing.JButton createUser;
     private javax.swing.JTextField createUserTextfield;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton deleteUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -444,10 +472,11 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton searchDUser;
     private javax.swing.JButton searchRegister;
     private javax.swing.JButton searchUser;
     private javax.swing.JTable tableRegisters;
-    private javax.swing.JTable tableRegisters1;
+    public static javax.swing.JTable tableUsers;
     private javax.swing.JComboBox typeField;
     private javax.swing.JTextField userName;
     // End of variables declaration//GEN-END:variables

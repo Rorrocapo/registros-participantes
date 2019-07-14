@@ -5,8 +5,11 @@
  */
 package Model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -15,7 +18,11 @@ import javax.swing.table.TableColumnModel;
  * @author Darke
  */
 public class ProcedureShowTable {
-    public ProcedureShowTable(JTable table){
+    Connection conn;
+    Database con;
+    PreparedStatement consulta;
+    ResultSet resultado;
+    public ProcedureShowTable(JTable table, JTextField counter, boolean typeUser) throws Throwable{
         DefaultTableModel modelo = new DefaultTableModel();
         TableColumnModel cols  = table.getColumnModel();
         ResultSet rs = Database.getTabla("select *from tabla_registros");
@@ -38,10 +45,46 @@ public class ProcedureShowTable {
             }
             cols.getColumn(6).setPreferredWidth(150);
             cols.getColumn(7).setPreferredWidth(220);
-            
+            table.scrollRectToVisible(table.getCellRect(table.getRowCount()-1, 0,true));
         }catch(Exception e){
             System.out.println(e);
         }
+        
+        try {
+                conn = con.getConexion();
+                consulta = conn.prepareStatement("SELECT count(*) FROM tabla_registros ");
+                resultado = consulta.executeQuery();
+                if (resultado.next()) {
+                    counter.setText(resultado.getString("count(*)"));
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        
+        if(typeUser){
+            DefaultTableModel modeloUsr = new DefaultTableModel();
+            TableColumnModel colsUsr  = View.AdminWindow.tableUsers.getColumnModel();
+            ResultSet rsUsr = Database.getTabla("select usuario, count(usuario_registro) from usuarios left join tabla_registros on usuario=usuario_registro group by usuario");
+            modeloUsr.setColumnIdentifiers(new Object[]{"Usuario","Contador"});
+            
+            try{
+                while(rsUsr.next()){//añade los registros al modelo
+                    modeloUsr.addRow(new Object[]{rsUsr.getString("usuario"),rsUsr.getString("count(usuario_registro)")});
+                }  
+            View.AdminWindow.tableUsers.setModel(modeloUsr);
+            for(int i=0;i<View.AdminWindow.tableUsers.getColumnCount();i++){
+                colsUsr.getColumn(i).setPreferredWidth(100);
+            }
+            colsUsr.getColumn(6).setPreferredWidth(150);
+            colsUsr.getColumn(7).setPreferredWidth(220);
+            View.AdminWindow.tableUsers.scrollRectToVisible(View.AdminWindow.tableUsers.getCellRect(View.AdminWindow.tableUsers.getRowCount()-1, 0,true));
+            }catch(Exception e){
+                System.out.println(e);
+            }
+            
+        }
+        
+        this.finalize();
     }
 }
     
