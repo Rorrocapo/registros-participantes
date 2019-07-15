@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Controller;
 
 /**
  *
  * @author Darke
  */
-public class ProcedureCreateUser {
-    public ProcedureCreateUser(){
-        
+public class CreateUser {
+    private boolean create=true;
+    public static String type;
+    public CreateUser(String usr, String psswd, String typeUser){
+        type=typeUser;
     }
 }
