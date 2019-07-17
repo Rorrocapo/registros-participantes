@@ -5,6 +5,9 @@
  */
 package View;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -16,6 +19,7 @@ public class AdminWindow extends javax.swing.JFrame {
      * Creates new form AdminWindow
      */
     public static final boolean typeAdmin=true;
+    private String search;
     public AdminWindow() throws Throwable {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -36,13 +40,13 @@ public class AdminWindow extends javax.swing.JFrame {
         userName = new javax.swing.JTextField();
         backButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        searchStudentField = new javax.swing.JTextField();
         searchRegister = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableRegisters = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         counterRegisters = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -91,6 +95,11 @@ public class AdminWindow extends javax.swing.JFrame {
 
         searchRegister.setText("Buscar");
         searchRegister.setFocusable(false);
+        searchRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchRegisterActionPerformed(evt);
+            }
+        });
 
         tableRegisters.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -132,10 +141,10 @@ public class AdminWindow extends javax.swing.JFrame {
         counterRegisters.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         counterRegisters.setEnabled(false);
 
-        jButton1.setText("Actualizar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        refreshButton.setText("Actualizar");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                refreshButtonActionPerformed(evt);
             }
         });
 
@@ -158,11 +167,11 @@ public class AdminWindow extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchStudentField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchRegister)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(refreshButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -186,9 +195,9 @@ public class AdminWindow extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addComponent(counterRegisters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchStudentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(searchRegister)
-                        .addComponent(jButton1)))
+                        .addComponent(refreshButton)))
                 .addContainerGap())
         );
 
@@ -452,9 +461,22 @@ public class AdminWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tableUsersMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        try {
+            new Controller.ShowTable(tableRegisters,counterRegisters,typeAdmin);
+        } catch (Throwable ex) {
+            Logger.getLogger(AdminWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void searchRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchRegisterActionPerformed
+        search=searchStudentField.getText();
+        try {
+            new Controller.SearchTable(tableRegisters,counterRegisters,typeAdmin,search);
+        } catch (Throwable ex) {
+            Logger.getLogger(AdminWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_searchRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -467,7 +489,6 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JButton createUser;
     private javax.swing.JTextField createUserTextfield;
     private javax.swing.JButton deleteUser;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -484,12 +505,13 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton refreshButton;
     private javax.swing.JButton searchDUser;
     private javax.swing.JButton searchRegister;
+    private javax.swing.JTextField searchStudentField;
     private javax.swing.JButton searchUser;
     private javax.swing.JTable tableRegisters;
     public static javax.swing.JTable tableUsers;

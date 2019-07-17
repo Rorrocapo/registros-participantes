@@ -12,8 +12,9 @@ import javax.swing.JTextField;
  *
  * @author Darke
  */
-public class ShowTable{   
+public class ShowTable{
+    private final String statement="select *from tabla_registros"; 
     public ShowTable(JTable table, JTextField counter, boolean typeUser) throws Throwable{
-        new Model.ProcedureShowTable(table,counter,typeUser);
+        new Model.ProcedureShowTable(table,counter,typeUser,statement);
     } 
 }

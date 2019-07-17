@@ -22,10 +22,10 @@ public class ProcedureShowTable {
     Database con;
     PreparedStatement consulta;
     ResultSet resultado;
-    public ProcedureShowTable(JTable table, JTextField counter, boolean typeUser) throws Throwable{
+    public ProcedureShowTable(JTable table, JTextField counter, boolean typeUser, String statement) throws Throwable{
         DefaultTableModel modelo = new DefaultTableModel();
         TableColumnModel cols  = table.getColumnModel();
-        ResultSet rs = Database.getTabla("select *from tabla_registros");
+        ResultSet rs = Database.getTabla(statement);
         modelo.setColumnIdentifiers(new Object[]{"Matricula","RFC","Nombre(s)","Apellido P.","Apellido M","Genero","Email","Lugar de residencia","Pais","Estado","Ciudad","Tel. de casa"
         ,"Tel. Celular","Tel. de oficina","Nivel Escolar","Título","Institucion","Año de egreso","Nombre de contacto de emergencia","Tel. Contacto de emergencia","Discapacidad",
         "Nombre de la empresa","Actividad que labora","Sector laboral de la empresa","¿Cómo se entero?","Otro curso interesado","Curso que tomó","Nivel","Módulo","Inicio","Termino",
