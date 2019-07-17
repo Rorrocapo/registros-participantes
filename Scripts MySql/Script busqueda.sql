@@ -1,18 +1,15 @@
 Delimiter //
-create procedure search(in word varchar(45))
+create procedure buscar(in palabra varchar(45))
 
 begin
-	select *from tabla_registros where idMatricula like word or 
-    rfc like word or 
-    nombre like word or 
-    apellido_paterno like word or 
-    apellido_materno like word or 
-    genero like word or 
-    email like word or 
-    lugar_residencia like word or
-    nombre_pais like word or 
-    nombre_estado like word or 
-    nombre_ciudad like word or 
-    tel_fijo like word or 
-    tel_cel like word or;
+	select *from tabla_registros where idMatricula like palabra or 
+    rfc like palabra or 
+    nombre like palabra or 
+    apellido_paterno like palabra or 
+    apellido_materno like palabra or 
+    email like palabra or 
+    tel_fijo like palabra or 
+    tel_cel like palabra or
+    tel_oficina like palabra or
+   	curso_tomado like palabra;
 END //
