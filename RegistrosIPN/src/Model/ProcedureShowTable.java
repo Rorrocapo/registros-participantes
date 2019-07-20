@@ -43,8 +43,9 @@ public class ProcedureShowTable {
             for(int i=0;i<table.getColumnCount();i++){
                 cols.getColumn(i).setPreferredWidth(100);
             }
-            cols.getColumn(6).setPreferredWidth(150);
-            cols.getColumn(7).setPreferredWidth(220);
+            cols.getColumn(2).setPreferredWidth(220);
+            cols.getColumn(6).setPreferredWidth(250);
+            cols.getColumn(1).setPreferredWidth(220);
             table.scrollRectToVisible(table.getCellRect(table.getRowCount()-1, 0,true));
         }catch(Exception e){
             System.out.println(e);

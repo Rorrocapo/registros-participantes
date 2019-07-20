@@ -5,14 +5,18 @@
  */
 package Controller;
 
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import org.apache.commons.codec.digest.DigestUtils;
+
 /**
  *
  * @author Darke
  */
 public class CreateUser {
-    private boolean create=true;
-    public static String type;
-    public CreateUser(String usr, String psswd, String typeUser){
-        type=typeUser;
+    private boolean task=true; 
+    public CreateUser(JTextField usr, JTextField psswd, JComboBox type) throws Throwable{
+        new Model.ProcedureCreateDeleteUser(usr, psswd, type,task);
+       this.finalize();
     }
 }
