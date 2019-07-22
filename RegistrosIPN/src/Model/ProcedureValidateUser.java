@@ -21,13 +21,15 @@ public class ProcedureValidateUser {
     Database con;
     PreparedStatement consulta;
     ResultSet resultado;
-    public ProcedureValidateUser(String statement){
+    public static String userName;
+    public ProcedureValidateUser(String statement,String user) throws Throwable{
         try {
                 conn = con.getConexion();
                 consulta = conn.prepareStatement(statement);
                 resultado = consulta.executeQuery();
                 if (resultado.next()) {
-                    Controller.ValidateAdmin.userName=resultado.getString("usuario");
+                    user=resultado.getString("usuario");
+                    userName=user;
                     Controller.ValidateAdmin.validate=true;
                     Controller.ValidateUser.validate=true;
                 } else {
@@ -37,7 +39,6 @@ public class ProcedureValidateUser {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex);
             }
- 
+        this.finalize();
     }
-    
 }

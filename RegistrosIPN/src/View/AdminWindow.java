@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 
 /**
@@ -293,18 +294,16 @@ public class AdminWindow extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
-                    .addComponent(createUserTextfield)
-                    .addComponent(jLabel5)
-                    .addComponent(createPswdTextField)
-                    .addComponent(jLabel9)
-                    .addComponent(typeField, 0, 150, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel4)
+                        .addComponent(createUserTextfield)
+                        .addComponent(jLabel5)
+                        .addComponent(createPswdTextField)
+                        .addComponent(jLabel9)
+                        .addComponent(typeField, 0, 150, Short.MAX_VALUE))
+                    .addComponent(createUser))
                 .addContainerGap(63, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createUser)
-                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,9 +320,9 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(typeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(createUser)
-                .addGap(37, 37, 37))
+                .addGap(38, 38, 38))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -389,9 +388,9 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(typeFieldDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(deleteUser)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -418,7 +417,7 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 243, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -522,17 +521,13 @@ public class AdminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_searchDUserActionPerformed
 
     private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
-        if(deleteUserTextfield.getText().isEmpty() && typeFieldDelete.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Necesita buscar un usuario primero para eliminarlo.");
-        }else{
-            try {
+        try {
                 new Controller.DeleteUser(deleteUserTextfield, typeFieldDelete);
             } catch (Throwable ex) {
                 Logger.getLogger(AdminWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             deleteUserTextfield.setText("");
             typeFieldDelete.setText("");
-        }
     }//GEN-LAST:event_deleteUserActionPerformed
 
     private void deleteUserTextfieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_deleteUserTextfieldKeyPressed
@@ -581,6 +576,6 @@ public class AdminWindow extends javax.swing.JFrame {
     public static javax.swing.JTable tableUsers;
     private javax.swing.JComboBox typeField;
     private javax.swing.JTextField typeFieldDelete;
-    private javax.swing.JTextField userName;
+    public static javax.swing.JTextField userName;
     // End of variables declaration//GEN-END:variables
 }

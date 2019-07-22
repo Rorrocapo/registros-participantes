@@ -6,6 +6,9 @@
 package Controller;
 
 import Model.ProcedureValidateUser;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -14,9 +17,13 @@ import Model.ProcedureValidateUser;
 public class ValidateAdmin {
     public static boolean validate=false;
     public static String userName;
-    public ValidateAdmin(String usr, String psswd) throws Throwable{
-        String statement = "SELECT * FROM usuarios WHERE usuario='"+usr+"' and contraseña='"+psswd+"' and tipo_usuario='admin'";
-        new ProcedureValidateUser(statement);
+    public ValidateAdmin(JTextField usr, JPasswordField psswd) throws Throwable{
+        String user=usr.getText();
+        String password= new String(psswd.getPassword());
+        password= DigestUtils.md5Hex(password);
+        String statement = "SELECT usuario FROM usuarios WHERE usuario='"+user+"' and contraseña='"+password+"' and tipo_usuario='admin'";
+        new ProcedureValidateUser(statement,user);
+        userName=Model.ProcedureValidateUser.userName;
         this.finalize();
     }
     

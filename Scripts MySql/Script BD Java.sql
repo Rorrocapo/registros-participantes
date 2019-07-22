@@ -120,4 +120,4 @@ on delete cascade
 );
 
 insert into usuarios(usuario,contraseña,tipo_usuario)
-	values('admin','admin','admin');
+	values('admin','21232f297a57a5a743894a0e4a801fc3','admin');

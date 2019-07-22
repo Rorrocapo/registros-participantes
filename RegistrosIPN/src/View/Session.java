@@ -38,9 +38,7 @@ public class Session extends javax.swing.JFrame {
     }
     
     public void LoginAdmin() throws Throwable{
-        usr=userTextField.getText();
-        psswd= new String(psswdTextField.getPassword());
-        new ValidateAdmin(usr,psswd);
+        new ValidateAdmin(userTextField,psswdTextField);
         if(Controller.ValidateAdmin.validate){
             new AdminWindow().setVisible(true);
             this.dispose();
@@ -48,9 +46,7 @@ public class Session extends javax.swing.JFrame {
     }
     
     public void ValidateUser() throws Throwable{
-        usr=userTextField.getText();
-        psswd= new String(psswdTextField.getPassword());
-        new ValidateUser(usr,psswd);
+        new ValidateUser(userTextField,psswdTextField);
         if(Controller.ValidateUser.validate){
             new UserWindow().setVisible(true);
             this.dispose();
