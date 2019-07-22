@@ -22,26 +22,21 @@ public class ProcedureCreateDeleteUser {
     private Database con;
     private PreparedStatement consulta;
     private ResultSet resultado;
-    private String user,password,typeUser;
-    public ProcedureCreateDeleteUser(JTextField usr, JTextField psswd,JComboBox type,boolean task){
-        user= usr.getText();
-        password= DigestUtils.md5Hex(psswd.getText()); 
-        typeUser= type.getSelectedItem().toString();
-        
+    public ProcedureCreateDeleteUser(String usr, String psswd,String type,boolean task){
         if(task){
-            CreateUser();
+            CreateUser(usr,psswd,type);
         }else {
-            DeleteUser();
+            DeleteUser(usr,type);
         }
     }
     
-    public void CreateUser(){
+    public void CreateUser(String usr, String psswd,String type){
         try {
                 conn = con.getConexion();
                 consulta = conn.prepareStatement("insert into usuarios(usuario,contraseña,tipo_usuario) values(upper(?),?,?)");
-                consulta.setString(1, user);
-                consulta.setString(2, password);
-                consulta.setString(3, typeUser);
+                consulta.setString(1, usr);
+                consulta.setString(2, psswd);
+                consulta.setString(3, type);
                 int result = consulta.executeUpdate();
                 if (result > 0) {
                     JOptionPane.showMessageDialog(null, "Se ha creado el usuario exitosamente.");
@@ -49,23 +44,24 @@ public class ProcedureCreateDeleteUser {
                     JOptionPane.showMessageDialog(null, "Error al crear usario");
                 }
             } catch (Exception ex) {
-                ex.printStackTrace();
+               JOptionPane.showMessageDialog(null, ex);
             }
     }
     
-    public void DeleteUser(){
+    public void DeleteUser(String usr,String type){
         try{
                 conn = con.getConexion();
-                consulta = conn.prepareStatement("delete from usuarios where usuario=?");
-                consulta.setString(1, user);
+                consulta = conn.prepareStatement("call eliminar(?,?)");
+                consulta.setString(1, usr);
+                consulta.setString(2, type);
                 int result = consulta.executeUpdate();
                 if (result > 0) {
-                    JOptionPane.showMessageDialog(null, "Se ha creado el usuario exitosamente.");
+                    JOptionPane.showMessageDialog(null, "Se ha eliminado el usuario exitosamente.");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error al crear usario");
+                    JOptionPane.showMessageDialog(null, "Usuario no existe o solo queda un administrador.\nDebe quedar aunque sea un administrador");
                 }
         }catch(Exception ex){
-            
+            JOptionPane.showMessageDialog(null, ex);
         }
     }
 }

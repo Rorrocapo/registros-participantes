@@ -65,19 +65,19 @@ public class ProcedureShowTable {
         if(typeUser){
             DefaultTableModel modeloUsr = new DefaultTableModel();
             TableColumnModel colsUsr  = View.AdminWindow.tableUsers.getColumnModel();
-            ResultSet rsUsr = Database.getTabla("select usuario, count(usuario_registro) from usuarios left join tabla_registros on usuario=usuario_registro group by usuario");
-            modeloUsr.setColumnIdentifiers(new Object[]{"Usuario","Contador"});
+            ResultSet rsUsr = Database.getTabla("select usuario, count(usuario_registro),tipo_usuario from usuarios left join tabla_registros on usuario=usuario_registro group by usuario");
+            modeloUsr.setColumnIdentifiers(new Object[]{"Usuario","Contador","Tipo de usuario"});
             
             try{
                 while(rsUsr.next()){//añade los registros al modelo
-                    modeloUsr.addRow(new Object[]{rsUsr.getString("usuario"),rsUsr.getString("count(usuario_registro)")});
+                    modeloUsr.addRow(new Object[]{rsUsr.getString("usuario"),rsUsr.getString("count(usuario_registro)"),rsUsr.getString("tipo_usuario")});
                 }  
             View.AdminWindow.tableUsers.setModel(modeloUsr);
             for(int i=0;i<View.AdminWindow.tableUsers.getColumnCount();i++){
                 colsUsr.getColumn(i).setPreferredWidth(100);
             }
-            colsUsr.getColumn(6).setPreferredWidth(150);
-            colsUsr.getColumn(7).setPreferredWidth(220);
+            /*colsUsr.getColumn(6).setPreferredWidth(150);
+            colsUsr.getColumn(7).setPreferredWidth(220);*/
             View.AdminWindow.tableUsers.scrollRectToVisible(View.AdminWindow.tableUsers.getCellRect(View.AdminWindow.tableUsers.getRowCount()-1, 0,true));
             }catch(Exception e){
                 System.out.println(e);

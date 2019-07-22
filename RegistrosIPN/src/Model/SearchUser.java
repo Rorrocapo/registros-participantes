@@ -5,39 +5,35 @@
  */
 package Model;
 
-import Controller.ValidateUser;
-import View.Session;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
- * @author darkness
+ * @author Darke
  */
-public class ProcedureValidateUser {
+public class SearchUser {
     Connection conn;
     Database con;
     PreparedStatement consulta;
     ResultSet resultado;
-    public ProcedureValidateUser(String statement){
+    public SearchUser(JTextField user,JTextField type) throws Throwable{
         try {
                 conn = con.getConexion();
-                consulta = conn.prepareStatement(statement);
+                consulta = conn.prepareStatement("select tipo_usuario from usuarios where usuario=?");
+                consulta.setString(1, user.getText());
                 resultado = consulta.executeQuery();
                 if (resultado.next()) {
-                    Controller.ValidateAdmin.userName=resultado.getString("usuario");
-                    Controller.ValidateAdmin.validate=true;
-                    Controller.ValidateUser.validate=true;
-                } else {
-                    Controller.ValidateAdmin.validate=false;
-                    Controller.ValidateUser.validate=false;
+                    type.setText(resultado.getString("tipo_usuario"));
+                }else{
+                    JOptionPane.showMessageDialog(null, "Usuario no existe");
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex);
             }
- 
+        this.finalize();
     }
-    
 }

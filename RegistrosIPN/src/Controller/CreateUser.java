@@ -14,9 +14,13 @@ import org.apache.commons.codec.digest.DigestUtils;
  * @author Darke
  */
 public class CreateUser {
-    private boolean task=true; 
+    private boolean task=true;
+    private String user,password,typeUser;
     public CreateUser(JTextField usr, JTextField psswd, JComboBox type) throws Throwable{
-        new Model.ProcedureCreateDeleteUser(usr, psswd, type,task);
+        user= usr.getText();
+        password= DigestUtils.md5Hex(psswd.getText()); 
+        typeUser= type.getSelectedItem().toString();
+        new Model.ProcedureCreateDeleteUser(user, password, typeUser ,task);
        this.finalize();
     }
 }
