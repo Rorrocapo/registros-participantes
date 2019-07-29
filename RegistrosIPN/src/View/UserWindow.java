@@ -5,7 +5,6 @@
  */
 package View;
 
-import static View.AdminWindow.typeAdmin;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,9 +20,22 @@ public class UserWindow extends javax.swing.JFrame {
     private String search;
     public UserWindow() throws Throwable {
         initComponents();
+        userName.setText(Controller.ValidateUser.userName);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         showTable();
+    }
+    
+    public void clean(){
+        
+    }
+    
+    public void save(){
+        new Controller.Insert(rfcField, nombreField, apellidoPaternoField, apellidoMaternoField, emailField,telCasaField, 
+                telCelularField,  telOficinaField, generoField, paisField, estadoField, 
+                ciudadField, residenciaField, nombreEmergenciaField, numeroEmergenciaField,discapacidadField, nivelEscolarComboBox, añoEgresoField, 
+                institucionField, tituloField, nombreCursoField, inicioField, terminoField,actividadDesempeñaField, enteradoField, cursoInteresadoField, 
+                nombreEmpresaField, sectorLaboralField, añoRegistroField, nivelComboBox,moduloComboBox,userName);
     }
 
     /**
@@ -46,7 +58,7 @@ public class UserWindow extends javax.swing.JFrame {
         rfcField = new javax.swing.JTextField();
         añoRegistroField = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        userName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         nombreField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -57,6 +69,7 @@ public class UserWindow extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         masculinoButton = new javax.swing.JRadioButton();
         FemeninoButton = new javax.swing.JRadioButton();
+        generoField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         residenciaField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -105,7 +118,7 @@ public class UserWindow extends javax.swing.JFrame {
         numeroEmergenciaField = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
-        jTextField23 = new javax.swing.JTextField();
+        enteradoField = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         siButton = new javax.swing.JRadioButton();
         noButton = new javax.swing.JRadioButton();
@@ -149,6 +162,11 @@ public class UserWindow extends javax.swing.JFrame {
         jLabel1.setText("RFC:");
 
         rfcField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        rfcField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                rfcFieldKeyPressed(evt);
+            }
+        });
 
         try {
             añoRegistroField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
@@ -161,9 +179,9 @@ public class UserWindow extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Año del registro:");
 
-        jTextField2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setEnabled(false);
+        userName.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        userName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        userName.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Nombre(s):");
@@ -199,18 +217,23 @@ public class UserWindow extends javax.swing.JFrame {
         FemeninoButton.setText("Femenino");
         FemeninoButton.setNextFocusableComponent(paisField);
 
+        generoField.setText("M");
+        generoField.setEnabled(false);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(generoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(FemeninoButton)
                     .addComponent(masculinoButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +243,9 @@ public class UserWindow extends javax.swing.JFrame {
                     .addComponent(masculinoButton)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(FemeninoButton)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FemeninoButton)
+                    .addComponent(generoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -344,7 +369,7 @@ public class UserWindow extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(backButton))
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -420,7 +445,7 @@ public class UserWindow extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(añoRegistroField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -616,7 +641,7 @@ public class UserWindow extends javax.swing.JFrame {
                         .addComponent(noButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cursoInteresadoField))
-                    .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(enteradoField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -624,7 +649,7 @@ public class UserWindow extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(enteradoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
@@ -728,6 +753,11 @@ public class UserWindow extends javax.swing.JFrame {
 
         guardarButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         guardarButton.setText("Guardar");
+        guardarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarButtonActionPerformed(evt);
+            }
+        });
 
         limpiarButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         limpiarButton.setText("Limpiar");
@@ -784,12 +814,13 @@ public class UserWindow extends javax.swing.JFrame {
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(guardarButton)
-                        .addGap(18, 18, 18)
+                        .addGap(17, 17, 17)
                         .addComponent(limpiarButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel33)
-                        .addGap(18, 18, 18)
-                        .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -825,13 +856,13 @@ public class UserWindow extends javax.swing.JFrame {
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(guardarButton)
                     .addComponent(limpiarButton)
-                    .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel33))
-                .addContainerGap())
+                    .addComponent(guardarButton)
+                    .addComponent(jLabel33)
+                    .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -928,7 +959,7 @@ public class UserWindow extends javax.swing.JFrame {
                 .addComponent(searchRegister)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(refreshButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 408, Short.MAX_VALUE)
                 .addComponent(jLabel34)
                 .addGap(18, 18, 18)
                 .addComponent(counterRegisters, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -936,25 +967,25 @@ public class UserWindow extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(11, 11, 11)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1059, Short.MAX_VALUE)
                     .addGap(11, 11, 11)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(669, Short.MAX_VALUE)
+                .addContainerGap(622, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchStudentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchRegister)
                     .addComponent(refreshButton)
                     .addComponent(jLabel34)
                     .addComponent(counterRegisters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(18, 18, 18))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(51, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(65, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Tabla de registrador", jPanel3);
@@ -965,7 +996,7 @@ public class UserWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1008, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1083, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1028,6 +1059,16 @@ public class UserWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_refreshButtonActionPerformed
 
+    private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
+        save();
+    }//GEN-LAST:event_guardarButtonActionPerformed
+
+    private void rfcFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rfcFieldKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           save(); 
+        }
+    }//GEN-LAST:event_rfcFieldKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton FemeninoButton;
@@ -1042,8 +1083,10 @@ public class UserWindow extends javax.swing.JFrame {
     private javax.swing.JTextField cursoInteresadoField;
     private javax.swing.JTextField discapacidadField;
     private javax.swing.JTextField emailField;
+    private javax.swing.JTextField enteradoField;
     private javax.swing.JRadioButton especifiqueButton;
     private javax.swing.JTextField estadoField;
+    private javax.swing.JTextField generoField;
     private javax.swing.ButtonGroup grupoCursoInteresado;
     private javax.swing.ButtonGroup grupoDiscapacidad;
     private javax.swing.ButtonGroup grupoEgresado;
@@ -1098,8 +1141,6 @@ public class UserWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField23;
     private javax.swing.JButton limpiarButton;
     private javax.swing.JRadioButton masculinoButton;
     private javax.swing.JComboBox moduloComboBox;
@@ -1128,5 +1169,6 @@ public class UserWindow extends javax.swing.JFrame {
     private javax.swing.JTextField telOficinaField;
     private javax.swing.JFormattedTextField terminoField;
     private javax.swing.JTextField tituloField;
+    private javax.swing.JTextField userName;
     // End of variables declaration//GEN-END:variables
 }

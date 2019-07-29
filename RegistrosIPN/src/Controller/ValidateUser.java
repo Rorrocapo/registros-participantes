@@ -21,8 +21,9 @@ public class ValidateUser {
         String user=usr.getText();
         String password= new String(psswd.getPassword());
         password= DigestUtils.md5Hex(password); 
-        String statement = "SELECT * FROM usuarios WHERE usuario='"+user+"' and contraseña='"+password+"'";
+        String statement = "SELECT usuario FROM usuarios WHERE usuario='"+user+"' and contraseña='"+password+"'";
         new ProcedureValidateUser(statement,user);
+        userName=Model.ProcedureValidateUser.userName;
         this.finalize();
     }
 }
