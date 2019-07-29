@@ -15,7 +15,7 @@ import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author Darke
+ * @author Darkness
  */
 public class ProcedureShowTable {
     Connection conn;

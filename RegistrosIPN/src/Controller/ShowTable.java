@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Darke
+ * @author Darkness
  */
 public class ShowTable{
     private final String statement="select *from tabla_registros"; 

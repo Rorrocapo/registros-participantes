@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Darke
+ * @author Darkness
  */
 public class Database {
     private static Connection conex;

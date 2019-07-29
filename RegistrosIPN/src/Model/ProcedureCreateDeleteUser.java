@@ -15,7 +15,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
- * @author Darke
+ * @author Darkness
  */
 public class ProcedureCreateDeleteUser {
     private Connection conn;

@@ -8,13 +8,10 @@ package View;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
 
 /**
  *
- * @author darkness
+ * @author Darkness
  */
 public class AdminWindow extends javax.swing.JFrame {
 
@@ -27,7 +24,7 @@ public class AdminWindow extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         userName.setText(Controller.ValidateAdmin.userName);
-        new Controller.ShowTable(tableRegisters,counterRegisters,typeAdmin);
+        showTable();
     }
 
     /**
@@ -453,6 +450,9 @@ public class AdminWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void showTable() throws Throwable{
+        new Controller.ShowTable(tableRegisters,counterRegisters,typeAdmin);
+    }
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         Model.Database.desconnect();
         this.dispose();
