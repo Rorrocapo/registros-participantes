@@ -1,5 +1,5 @@
 Delimiter //
-create procedure eliminar(in UserU varchar(45),
+create procedure sp_eliminar(in UserU varchar(45),
 in Tipo enum('normal','admin'))
 
 begin

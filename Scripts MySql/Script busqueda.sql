@@ -1,5 +1,5 @@
 Delimiter //
-create procedure buscar(in palabra varchar(45))
+create procedure sp_buscar(in palabra varchar(45))
 
 begin
 	select *from tabla_registros where idMatricula like palabra or 
