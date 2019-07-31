@@ -1,5 +1,5 @@
 Delimiter //
-create procedure sp_insertalumno(
+create procedure insertalumno(
 in sp_Rfc varchar(45) ,
 in sp_Nombre varchar(45),
 in sp_Apellido_paterno varchar(45),
@@ -41,7 +41,7 @@ declare id_pais_to_foreign bigint;
 declare id_estado_to_foreign bigint;
 declare id_ciudad_to_foreign bigint;
 declare id_lugar_to_foreign bigint;
-declare contador bigint;
+declare idGenerado bigint;
 declare codigo bigint;
 
 /*Ingresa los datos en la tabla persona y alumno*/
@@ -137,15 +137,16 @@ insert into historial_curso_alumno(curso_tomado,nivel,modulo,inicio,termino,alum
 	values(sp_Curso_tomado,sp_Nivel,sp_Modulo,sp_Inicio,sp_Termino,id_alumno_to_foreign,sp_Usuario_registro,current_date());
 
 /**********************************************************************************************************************/ 
-set contador = (select count(*)+1 from matricula_alumno where idMatricula like concat('%',sp_Matricula,'%'));
-if(contador<10)then
-	set codigo = concat(sp_Matricula,'000',contador);
-elseif(contador<100)then
-	set codigo = concat(sp_Matricula,'00',contador);
-elseif(contador<1000)then
-	set codigo = concat(sp_Matricula,'0',contador);
-elseif(contador<10000)then
-	set codigo = concat(sp_Matricula,contador);
+set idGenerado = (select count(*)+1 from matricula_alumno where idMatricula like concat('%',sp_Matricula,'%'));
+
+if(idGenerado<10)then
+	set codigo = concat(sp_Matricula,'000',idGenerado);
+elseif(idGenerado<100)then
+	set codigo = concat(sp_Matricula,'00',idGenerado);
+elseif(idGenerado<1000)then
+	set codigo = concat(sp_Matricula,'0',idGenerado);
+elseif(idGenerado<10000)then
+	set codigo = concat(sp_Matricula,idGenerado);
 end if;
 
 insert into matricula_alumno(idMatricula,alumno_idAlumno)

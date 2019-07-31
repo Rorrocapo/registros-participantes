@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import Model.Database;
 import Controller.ValidateUser;
 import Controller.ValidateAdmin;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
